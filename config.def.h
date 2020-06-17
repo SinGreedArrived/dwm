@@ -63,6 +63,11 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char *audioMuteToggle[]  = {"amixer","-q","set","Master","toggle"};
+static const char *audioPlus[]  = {"amixer","-q","set","Master","1%+"};
+static const char *audioMinus[]  = {"amixer","-q","set","Master","1%-"};
+static const char *xbacklightPlus[]  = {"xbacklight","-inc","5"};
+static const char *xbacklightMinus[]  = {"xbacklight","-dec","5"};
 
 #include <X11/XF86keysym.h>
 static Key keys[] = {
@@ -86,7 +91,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
+	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
@@ -106,12 +111,14 @@ static Key keys[] = {
 //User HotKeys
 	{ MODKEY|ControlMask,           XK_w,      spawn,          SHCMD("~/.lib/function.sh Wifi") },
 	{ MODKEY|ControlMask,           XK_h,      spawn,          SHCMD("~/.lib/function.sh Sony") },
+	{ MODKEY|ControlMask,           XK_l,      spawn,          SHCMD("~/.lib/function.sh ScreenLock") },
+	{ MODKEY|ControlMask,           XK_s,	     spawn,     		 SHCMD("~/.lib/function.sh browser_search") },
 	{ 0, XF86XK_TouchpadToggle,	    spawn,     SHCMD("~/.lib/function.sh TouchpadToggle") },
-	{ 0, XF86XK_MonBrightnessUp,	  spawn,     SHCMD("xbacklight -inc 5") },
-	{ 0, XF86XK_MonBrightnessDown,	spawn,     SHCMD("xbacklight -dec 5") },
-	{ 0, XF86XK_AudioMute,		      spawn,     SHCMD("amixer -q set %s toggle") },
-	{ 0, XF86XK_AudioRaiseVolume,	  spawn,     SHCMD("amixer -q set %s 1%%+") },
-	{ 0, XF86XK_AudioLowerVolume,	  spawn,     SHCMD("amixer -q set %s 1%%-") },
+	{ 0, XF86XK_MonBrightnessUp,	  spawn,     {.v =  xbacklightPlus } },
+	{ 0, XF86XK_MonBrightnessDown,	spawn,     {.v =  xbacklightMinus } },
+	{ 0, XF86XK_AudioMute,		      spawn,     {.v =  audioMuteToggle } },
+	{ 0, XF86XK_AudioRaiseVolume,	  spawn,     {.v =  audioPlus } },
+	{ 0, XF86XK_AudioLowerVolume,	  spawn,     {.v =  audioMinus } },
 };
 
 /* button definitions */
