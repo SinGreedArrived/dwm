@@ -117,6 +117,8 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_h,      spawn,          SHCMD("~/.lib/function.sh Sony") },
 	{ MODKEY|ControlMask,           XK_l,      spawn,          SHCMD("~/.lib/function.sh ScreenLock") },
 	{ MODKEY|ControlMask,           XK_s,	     spawn,     		 SHCMD("~/.lib/function.sh browser_search") },
+	{ MODKEY|ControlMask,           XK_m,	     spawn,     		 SHCMD("~/.lib/function.sh Mounted") },
+	{ MODKEY|ControlMask,           XK_u,	     spawn,     		 SHCMD("~/.lib/function.sh Umounted") },
 	{ 0, XF86XK_TouchpadToggle,	    spawn,     SHCMD("~/.lib/function.sh TouchpadToggle") },
 	{ 0, XF86XK_MonBrightnessUp,	  spawn,     {.v =  xbacklightPlus } },
 	{ 0, XF86XK_MonBrightnessDown,	spawn,     {.v =  xbacklightMinus } },
