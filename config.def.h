@@ -69,6 +69,8 @@ static const char *audioPlus[]  = {"amixer","-q","set","Master","1%+"};
 static const char *audioMinus[]  = {"amixer","-q","set","Master","1%-"};
 static const char *xbacklightPlus[]  = {"xbacklight","-inc","5"};
 static const char *xbacklightMinus[]  = {"xbacklight","-dec","5"};
+static const char *KbdbacklightPlus[]  = {"sudo","KbdBrightness","-inc","1"};
+static const char *KbdbacklightMinus[]  = {"sudo","KbdBrightness","-dec","1"};
 
 #include <X11/XF86keysym.h>
 static Key keys[] = {
@@ -113,6 +115,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 //User HotKeys
+	{ MODKEY|ControlMask,           XK_t,      spawn,          SHCMD("~/.lib/function.sh Translate") },
 	{ MODKEY|ControlMask,           XK_w,      spawn,          SHCMD("~/.lib/function.sh Wifi") },
 	{ MODKEY|ControlMask,           XK_h,      spawn,          SHCMD("~/.lib/function.sh Sony") },
 	{ MODKEY|ControlMask,           XK_l,      spawn,          SHCMD("~/.lib/function.sh ScreenLock") },
@@ -122,6 +125,8 @@ static Key keys[] = {
 	{ 0, XF86XK_TouchpadToggle,	    spawn,     SHCMD("~/.lib/function.sh TouchpadToggle") },
 	{ 0, XF86XK_MonBrightnessUp,	  spawn,     {.v =  xbacklightPlus } },
 	{ 0, XF86XK_MonBrightnessDown,	spawn,     {.v =  xbacklightMinus } },
+	{ 0, XF86XK_KbdBrightnessUp,	      spawn,     {.v =  KbdbacklightPlus } },
+	{ 0, XF86XK_KbdBrightnessDown,	    spawn,     {.v =  KbdbacklightMinus } },
 	{ 0, XF86XK_AudioMute,		      spawn,     {.v =  audioMuteToggle } },
 	{ 0, XF86XK_AudioRaiseVolume,	  spawn,     {.v =  audioPlus } },
 	{ 0, XF86XK_AudioLowerVolume,	  spawn,     {.v =  audioMinus } },
