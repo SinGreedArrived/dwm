@@ -843,14 +843,16 @@ enternotify(XEvent *e)
 
 	if ((ev->mode != NotifyNormal || ev->detail == NotifyInferior) && ev->window != root)
 		return;
-	c = wintoclient(ev->window);
-	m = c ? c->mon : wintomon(ev->window);
-	if (m != selmon) {
-		unfocus(selmon->sel, 1);
-		selmon = m;
-	} else if (!c || c == selmon->sel)
-		return;
-	focus(c);
+	//if (!focusonclick){
+		c = wintoclient(ev->window);
+		m = c ? c->mon : wintomon(ev->window);
+		if (m != selmon) {
+			unfocus(selmon->sel, 1);
+			selmon = m;
+		} else if (!c || c == selmon->sel)
+			return;
+		focus(c);
+	//}
 }
 
 void
@@ -1211,6 +1213,7 @@ motionnotify(XEvent *e)
 
 	if (ev->window != root)
 		return;
+	// Multimonit select
 	if ((m = recttomon(ev->x_root, ev->y_root, 1, 1)) != mon && mon) {
 		unfocus(selmon->sel, 1);
 		selmon = m;

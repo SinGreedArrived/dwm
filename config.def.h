@@ -7,6 +7,7 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int focusonclick       = 1;        /* Focus on click */
 static const char *fonts[]          = { "terminus:size=8" };
 static const char dmenufont[]       = "termius:size=8";
 static const char col_gray1[]       = "#222222";
@@ -67,15 +68,15 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *audioMuteToggle[]  = {"amixer","-q","set","Master","toggle"};
 static const char *audioPlus[]  = {"amixer","-q","set","Master","1%+"};
 static const char *audioMinus[]  = {"amixer","-q","set","Master","1%-"};
-static const char *xbacklightPlus[]  = {"xbacklight","-inc","5"};
-static const char *xbacklightMinus[]  = {"xbacklight","-dec","5"};
+static const char *ScreenPlus[]  = {"sudo","Brightness","-inc","5"};
+static const char *ScreenMinus[]  = {"sudo","Brightness","-dec","5"};
 static const char *KbdbacklightPlus[]  = {"sudo","KbdBrightness","-inc","1"};
 static const char *KbdbacklightMinus[]  = {"sudo","KbdBrightness","-dec","1"};
 
 #include <X11/XF86keysym.h>
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -123,8 +124,8 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_m,	     spawn,     		 SHCMD("~/.lib/function.sh Mounted") },
 	{ MODKEY|ControlMask,           XK_u,	     spawn,     		 SHCMD("~/.lib/function.sh Umounted") },
 	{ 0, XF86XK_TouchpadToggle,	    spawn,     SHCMD("~/.lib/function.sh TouchpadToggle") },
-	{ 0, XF86XK_MonBrightnessUp,	  spawn,     {.v =  xbacklightPlus } },
-	{ 0, XF86XK_MonBrightnessDown,	spawn,     {.v =  xbacklightMinus } },
+	{ 0, XF86XK_MonBrightnessUp,	  spawn,     {.v =  ScreenPlus } },
+	{ 0, XF86XK_MonBrightnessDown,	spawn,     {.v =  ScreenMinus } },
 	{ 0, XF86XK_KbdBrightnessUp,	      spawn,     {.v =  KbdbacklightPlus } },
 	{ 0, XF86XK_KbdBrightnessDown,	    spawn,     {.v =  KbdbacklightMinus } },
 	{ 0, XF86XK_AudioMute,		      spawn,     {.v =  audioMuteToggle } },
